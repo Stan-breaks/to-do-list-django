@@ -1,14 +1,58 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from .models import List
+from django.db import IntegrityError
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-    return render(request,'list/index.html')
-
+    user=request.user
+    if user.is_authenticated:
+        lists=List.objects.filter(user=user).all()
+        return render(request,'list/index.html',{
+        'lists':[list.serialize() for list in lists]
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+    
 def register(request):
     if request.method!='POST':
         return render(request,'list/register.html')
+    username=request.POST['username']
+    email=request.POST['email']
+    password=request.POST['password1']
+    confirm=request.POST['password2']
+    if password!=confirm:
+        return render(request,'list/register.html',{
+            'message':"passwords don't match"
+        })
+    try:
+        user=User.objects.create_user(username,email,password)
+        user.save()
+    except IntegrityError:
+        return render(request,'list/register.html',{
+            'message':"The email or the username is already registered"
+        })
+    login(request,user)
+    return HttpResponseRedirect(reverse('index'))
 
-def login(request):
-    pass
-def logout(request):
-    pass
+def login_view(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            return render(request,'list/login.html',{
+                'message':'Invalid password or username'
+        })
+    return render(request,'list/login.html')
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
