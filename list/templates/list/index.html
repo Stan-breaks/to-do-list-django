@@ -1,4 +1,30 @@
+
 {%extends 'list/layout.html'%}
+{%load static%}
 {%block body%}
-<h1>Hello world</h1>
+<div id="newtask">
+    <form>
+        <input class="form-control" type="text" id="text"/><br/>
+        <button type="submit"class="btn btn-primary" onclick="add()"data-url="{%url 'add'%}">Add task</button>
+    </form>
+</div>
+<div id="lists">
+    <ul>
+    {% if lists %}
+    {%for list in lists%}
+    <li>
+        <div class="list">
+            <span>{{list.text}}</span>
+            <span>{{list.timestamp}}</span>
+            <button class="btn btn-primary">Mark complete</button>
+            <button class="btn btn-primary">Delete</button>
+          </div>
+    </li>
+    {%endfor%}   
+    {% else %}
+    <li>Empty List</li>
+    {% endif %}
+   </ul>
+</div>
+<script src="{%static 'list/index.js'%}"></script>
 {%endblock%}

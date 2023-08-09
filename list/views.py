@@ -1,19 +1,22 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import List
 from django.db import IntegrityError
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
     user=request.user
     if user.is_authenticated:
         lists=List.objects.filter(user=user).all()
+        serializedlists=[list.serialize() for list in lists]
         return render(request,'list/index.html',{
-        'lists':[list.serialize() for list in lists]
+        'lists':serializedlists
         })
     else:
         return HttpResponseRedirect(reverse('login'))
@@ -56,3 +59,20 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+@csrf_exempt
+def add(request):
+    if request.method=='POST':
+        data=json.load(request.body)
+        text=data.get('text')
+        if not text:
+            return JsonResponse({
+                "Error":"Added empty task"
+            })
+        list=List(user=request.user,text=text)
+        list.save()
+        return JsonResponse({"message":"Successfully added"})
+    lists=List.objects.all()
+    serializelist=[list.serialize() for list in lists]
+    return JsonResponse(serializelist,safe=False)
