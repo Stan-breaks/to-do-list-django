@@ -1,5 +1,5 @@
 function add(event){
- 
+    event.preventDefault();
     fetch(event.target.dataset.url,{
         method:'POST',
         body:JSON.stringify({
@@ -9,8 +9,6 @@ function add(event){
     .then(response=>response.json())
     .then(response=>{
         console.log(response);
-    })
-    setTimeout(function() {
         location.reload();
-    }, 500);
+    })
 }

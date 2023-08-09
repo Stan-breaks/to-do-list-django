@@ -64,7 +64,7 @@ def logout_view(request):
 @csrf_exempt
 def add(request):
     if request.method=='POST':
-        data=json.load(request.body)
+        data=json.loads(request.body)
         text=data.get('text')
         if not text:
             return JsonResponse({
