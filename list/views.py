@@ -76,3 +76,14 @@ def add(request):
     lists=List.objects.all()
     serializelist=[list.serialize() for list in lists]
     return JsonResponse(serializelist,safe=False)
+
+@login_required
+@csrf_exempt
+def mark(request,listid):
+    if request.method=='POST':
+        list=List.objects.get(pk=listid)
+        list.done=True
+        list.save()
+        return JsonResponse({'Message':'list marked successfully'})
+
+        

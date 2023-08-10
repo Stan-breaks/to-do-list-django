@@ -14,9 +14,9 @@
     {%for list in lists%}
     <li>
         <div class="list">
-            <span>{{list.text}}</span>
+            <span class="{% if list.done %}crossed-out{% endif %}">{{list.text}}</span>
             <span class="time">{{list.timestamp}}</span><br/>
-            <button class="btn btn-primary mark">Mark complete</button>
+            <button class="btn btn-primary mark"data-url="{url 'mark' list.id}">Mark complete</button>
             <button class="btn btn-primary delete">Delete</button>
           </div>
     </li>

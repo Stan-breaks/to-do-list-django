@@ -12,9 +12,19 @@ function add(event){
         location.reload();
     })
 }
-function mark_task(){
-
+function mark_task(event){
+fetch(event.target.dataset.url,{
+    method:'POST',
+    body:JSON.stringify({
+        done:true
+    })
+})
+.then(response=>response.json())
+.then(response=>{
+    console.log(response)
+    location.reload()
+})
 }
-function delete_task(){
+function delete_task(event){
 
 }

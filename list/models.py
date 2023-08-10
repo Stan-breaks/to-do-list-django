@@ -10,6 +10,7 @@ class List(models.Model):
     timestamp=models.DateTimeField(auto_now_add=True)
     def serialize(self):
         return{
+            'id':self.id,
             'user':self.user.username,
             'text':self.text,
             'done':self.done,
