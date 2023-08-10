@@ -6,21 +6,21 @@
 }
 #lists ul {
     list-style-type: none;   
-    width: 70%;
     margin-left: auto;
+    width: 70%;
     margin-right: auto; 
-     
 }
 .list{
-    margin:20px;
+    animation-name: hide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+    height: 10%;
+    margin-bottom:20px;
     background-color: lightblue;
     padding: 10px;
     border:1px solid rgb(57, 57, 252);
     border-radius: 10px;
-    animation-name: hide;
-    animation-duration: 1s;
-    animation-play-state:paused;
-    animation-fill-mode: forwards;
 }
 .mark{
    margin-left:0;
@@ -41,17 +41,22 @@
 @keyframes
 hide{
     0%{
-        opacity: 1;
+        opacity:1;
+        margin-bottom:20px;
+        padding:10px;
+        height: 10%;
     }
-    50%{
-     opacity: 0;
+    75%{
+        opacity: 0;
+        margin-bottom:20px;
+        padding:10px;
+        height: 10%;
     }
     100%{
         opacity: 0;
-        margin-bottom:0;
+        margin-bottom:-70px;
         padding:0;
-        width: 0;
-        height:0;
+        height: 0;
     }
 }
 

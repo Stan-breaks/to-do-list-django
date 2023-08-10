@@ -12,13 +12,12 @@
     <ul>
     {% if lists %}
     {%for list in lists%}
-    <li>
-        <div class="list">
+    <li class="list">
+
             <span class="{% if list.done %}crossed-out{% endif %}">{{list.text}}</span>
             <span class="time">{{list.timestamp}}</span><br/>
             <button onclick="mark_task(event)"class="btn btn-primary mark"data-url="{%url 'mark' list.id%}">Mark complete</button>
             <button onclick="delete_task(event)"class="btn btn-primary delete"data-url="{%url 'delete' list.id%}">Delete</button>
-          </div>
     </li>
     {%endfor%}   
     {% else %}
