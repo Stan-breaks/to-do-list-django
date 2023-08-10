@@ -4,7 +4,27 @@
 #newtask{
     margin:30px
 }
-ul {
-    list-style-type: none; /* Remove default bullet points */
-    padding-left: 10; /* Remove left padding to align text */
-  }
+#lists ul {
+    list-style-type: none;   
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto; 
+     
+}
+.list{
+    margin:20px;
+    padding: 10px;
+    border:1px solid rgb(57, 57, 252)
+}
+.mark{
+   margin-left:0;
+   margin-top:10px;
+}
+.time{
+    float:right;
+    color:gray
+}
+.delete{
+   margin-left:40px;
+   margin-top:10px;
+}

@@ -12,3 +12,9 @@ function add(event){
         location.reload();
     })
 }
+function mark_task(){
+
+}
+function delete_task(){
+
+}
