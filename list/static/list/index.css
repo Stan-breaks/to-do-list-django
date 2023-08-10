@@ -4,3 +4,7 @@
 #newtask{
     margin:30px
 }
+ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 10; /* Remove left padding to align text */
+  }

@@ -13,5 +13,5 @@ class List(models.Model):
             'user':self.user.username,
             'text':self.text,
             'done':self.done,
-            'timestamp':self.timestamp
+            'timestamp':self.timestamp.strftime('%b %d %Y, %I:%M %p')
         }
