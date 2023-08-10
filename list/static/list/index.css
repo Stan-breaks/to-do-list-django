@@ -13,8 +13,14 @@
 }
 .list{
     margin:20px;
+    background-color: lightblue;
     padding: 10px;
-    border:1px solid rgb(57, 57, 252)
+    border:1px solid rgb(57, 57, 252);
+    border-radius: 10px;
+    animation-name: hide;
+    animation-duration: 1s;
+    animation-play-state:paused;
+    animation-fill-mode: forwards;
 }
 .mark{
    margin-left:0;
@@ -32,4 +38,20 @@
     text-decoration: line-through;
     color: gray;
 }
-  
+@keyframes
+hide{
+    0%{
+        opacity: 1;
+    }
+    50%{
+     opacity: 0;
+    }
+    100%{
+        opacity: 0;
+        margin-bottom:0;
+        padding:0;
+        width: 0;
+        height:0;
+    }
+}
+

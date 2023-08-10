@@ -86,4 +86,13 @@ def mark(request,listid):
         list.save()
         return JsonResponse({'Message':'list marked successfully'})
 
+@login_required
+@csrf_exempt
+def delete_view(request,listid):
+    if request.method=='POST':
+        list=List.objects.get(pk=listid)
+        list.delete()
+        return JsonResponse({'message':'List deleted'})
+
+
         

@@ -26,5 +26,20 @@ fetch(event.target.dataset.url,{
 })
 }
 function delete_task(event){
-
+var taskContainer=event.target.parentElement;
+ taskContainer.style.animationPlayState='running';
+ taskContainer.addEventListener('animationend',()=>{
+  taskContainer.remove()  
+  fetch(event.target.dataset.url,{
+    method:'POST',
+    body:JSON.stringify({
+        delete:true
+    })
+  })
+  .then(response=>response.json())
+  .then(response=>{
+    console.log(response)
+    location.reload()
+  })
+ });
 }

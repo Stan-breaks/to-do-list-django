@@ -4,7 +4,7 @@
 {%block body%}
 <div id="newtask">
     <form>
-        <input class="form-control" type="text" id="text"/><br/>
+        <input autofocus class="form-control" type="text" id="text"/><br/>
         <button type="submit"class="btn btn-primary" onclick="add(event)"data-url="{%url 'add'%}">Add task</button>
     </form>
 </div>
@@ -17,7 +17,7 @@
             <span class="{% if list.done %}crossed-out{% endif %}">{{list.text}}</span>
             <span class="time">{{list.timestamp}}</span><br/>
             <button onclick="mark_task(event)"class="btn btn-primary mark"data-url="{%url 'mark' list.id%}">Mark complete</button>
-            <button class="btn btn-primary delete">Delete</button>
+            <button onclick="delete_task(event)"class="btn btn-primary delete"data-url="{%url 'delete' list.id%}">Delete</button>
           </div>
     </li>
     {%endfor%}   
